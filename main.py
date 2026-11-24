@@ -30,6 +30,10 @@ def validate(text):
         raise ValueError("entry must not have leading or trailing white space")
     if "\n" in text or "\r" in text:
         raise ValueError("entry must be a single line")
+    if "  " in text:
+        raise ValueError("entry must not contain doubled spaces")
+    if any(ord(ch) < 32 for ch in text):
+        raise ValueError("entry must not contain control characters")
     text.encode("utf-8")  # must be valid UTF-8 text
     return True
 
